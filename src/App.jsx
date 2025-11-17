@@ -1,20 +1,8 @@
-import { useState } from 'react';
-import { BookingFormPage } from './pages/BookingFormPage';
-import { MeetingRoomPage } from './pages/MeetingRoomPage';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/routes'; 
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('list');
-
-  const handleNavigate = (page) => {
-    setCurrentPage(page);
-  };
-
-  return (
-    <>
-      {currentPage === 'list' && <MeetingRoomPage onNavigate={handleNavigate} />}
-      {currentPage === 'create' && <BookingFormPage onNavigate={handleNavigate} />}
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

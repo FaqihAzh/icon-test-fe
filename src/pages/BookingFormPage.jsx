@@ -7,8 +7,11 @@ import { Checkbox } from "../components/ui/Checkbox";
 import { ChevronLeft, Calendar } from "lucide-react";
 import { api } from "../services/api";
 import { calculateKonsumsi, calculateNominal, formatCurrency } from "../utils/consumtion";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-export const BookingFormPage = ({ onNavigate }) => {
+export const BookingFormPage = () => { // Hapus prop onNavigate
+  const navigate = useNavigate(); // Gunakan hook useNavigate
+
   // State untuk master data
   const [masterOffices, setMasterOffices] = useState([]);
   const [masterRooms, setMasterRooms] = useState([]);
@@ -182,12 +185,12 @@ export const BookingFormPage = ({ onNavigate }) => {
         nominal,
       });
       alert("Pemesanan berhasil disimpan!");
-      onNavigate('list');
+      navigate('/'); // Navigasi ke halaman daftar
     }
   };
 
   const handleCancel = () => {
-    onNavigate('list');
+    navigate('/'); // Navigasi ke halaman daftar
   };
 
   if (loading) {
