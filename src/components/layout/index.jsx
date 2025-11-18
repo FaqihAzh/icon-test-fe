@@ -34,7 +34,7 @@ export const Layout = ({
                   </Button>
                 )}
 
-                <div>
+                <div className='space-y-1'>
                   {title && (
                     <h1 className="text-2xl md:text-3xl font-bold text-text-primary">
                       {title}

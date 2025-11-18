@@ -1,6 +1,6 @@
 export const API_BASE_URLS = {
-  PRIMARY: 'https://6666c7aea2f8516ff7a4e261.mockapi.io/api/dummy-data',
-  SECONDARY: 'https://6686cb5583c983911b03a7f3.mockapi.io/api/dummy-data',
+  PRIMARY: import.meta.env.VITE_BASE_URL_PRIMARY,
+  SECONDARY: import.meta.env.VITE_BASE_URL_SECONDARY,
 };
 
 export const APP_CONFIG = {
