@@ -71,7 +71,7 @@ export const BookingFormPage = () => {
   }
 
   return (
-    <Layout title="Pengajuan Perangkat" breadCrumbs={breadCrumbs} showBack={true}>
+    <Layout title="Ruang Meeting" breadCrumbs={breadCrumbs} showBack={true}>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-8">
           <div>
