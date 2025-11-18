@@ -1,38 +1,27 @@
-import { Layout } from "../components/layout/Layout";
-import { Button } from "../components/ui/Button";
-import { Plus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-
-// API
-const BASE_URL_1 = "https://6666c7aea2f8516ff7a4e261.mockapi.io/api/dummy-data";
-
-export const api = {
-  getMasterMeetingRooms: async () => {
-    const response = await fetch(`${BASE_URL_1}/masterMeetingRooms`);
-    return response.json();
-  },
-};
+import { Layout } from '../components/layout';
+import { Button } from '../components/ui/Button';
+import { Plus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { masterDataService } from '../lib/api';
+import { APP_CONFIG } from '../config/constants';
+import { PageLoader } from '../components/ui/Loader';
 
 export const MeetingRoomPage = () => {
   const navigate = useNavigate();
-
-  const breadCrumbs = [{ label: "Ruang Meeting", href: "/ruang-meeting" }];
+  const breadCrumbs = [{ label: 'Ruang Meeting', href: '/ruang-meeting' }];
 
   const [meetingRooms, setMeetingRooms] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // pagination
-  const PAGE_SIZE = 6;
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [visibleCount, setVisibleCount] = useState(APP_CONFIG.PAGE_SIZE);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await api.getMasterMeetingRooms();
+        const data = await masterDataService.getMeetingRooms();
         setMeetingRooms(data);
       } catch (error) {
-        console.error("Gagal fetch data meeting room:", error);
+        console.error('Gagal fetch data meeting room:', error);
       } finally {
         setLoading(false);
       }
@@ -46,11 +35,9 @@ export const MeetingRoomPage = () => {
   return (
     <Layout title="Ruang Meeting" breadCrumbs={breadCrumbs}>
       <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
-        
-        {/* BUTTON PESAN */}
         <div className="flex justify-end mb-6">
           <Button
-            onClick={() => navigate("/ruang-meeting/pengajuan-perangkat")}
+            onClick={() => navigate('/ruang-meeting/pesan-ruangan')}
             className="flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
@@ -58,37 +45,27 @@ export const MeetingRoomPage = () => {
           </Button>
         </div>
 
-        {/* LIST */}
         <div className="min-h-64">
           {loading ? (
-            <p className="text-gray-500 text-center">Loading...</p>
+            <PageLoader text="Memuat data ruangan..." />
           ) : displayedRooms.length === 0 ? (
             <p className="text-gray-500 text-center">Tidak ada data ruangan.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {displayedRooms.map((item) => (
+              {displayedRooms.map(item => (
                 <div
                   key={item.id}
-                  className="rounded-xl border border-[#EEEEEE] shadow-xs p-5 transition hover:shadow-sm hover:scale-[1.01] cursor-pointer"
+                  className="rounded-xl border border-gray-200 shadow-xs p-5 transition hover:shadow-sm hover:scale-[1.01] cursor-pointer"
                 >
                   <div className="flex flex-col">
-
-                    {/* Nama Ruangan */}
-                    <h2 className="text-lg font-semibold text-[#333333] mb-0.5">
+                    <h2 className="text-lg font-semibold text-text-primary mb-0.5">
                       {item.roomName}
                     </h2>
-
-                    {/* Office */}
-                    <p className="text-sm text-[#9E9E9E]">{item.officeName}</p>
-
-                    {/* Divider */}
-                    <hr className="bg-[#EEEEEE] text-[#EEEEEE] my-2" />
-
-                    {/* Kapasitas */}
-                    <p className="text-sm text-[#4A8394] font-semibold">
+                    <p className="text-sm text-gray-500">{item.officeName}</p>
+                    <hr className="border-gray-200 my-2" />
+                    <p className="text-sm text-secondary-500 font-semibold">
                       Kapasitas {item.capacity} Orang
                     </p>
-
                   </div>
                 </div>
               ))}
@@ -96,22 +73,21 @@ export const MeetingRoomPage = () => {
           )}
         </div>
 
-        {/* PAGINATION */}
-        {!loading && meetingRooms.length > PAGE_SIZE && (
+        {!loading && meetingRooms.length > APP_CONFIG.PAGE_SIZE && (
           <div className="flex items-center justify-center gap-3 mt-6">
             {visibleCount < meetingRooms.length && (
               <Button
                 variant="outline"
-                onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
+                onClick={() => setVisibleCount(prev => prev + APP_CONFIG.PAGE_SIZE)}
               >
                 Load More
               </Button>
             )}
 
-            {visibleCount > PAGE_SIZE && (
+            {visibleCount > APP_CONFIG.PAGE_SIZE && (
               <Button
                 variant="outline"
-                onClick={() => setVisibleCount(PAGE_SIZE)}
+                onClick={() => setVisibleCount(APP_CONFIG.PAGE_SIZE)}
               >
                 Show Less
               </Button>
