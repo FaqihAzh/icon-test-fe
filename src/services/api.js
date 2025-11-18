@@ -4,7 +4,9 @@ const BASE_URL_2 = 'https://6686cb5583c983911b03a7f3.mockapi.io/api/dummy-data';
 export const api = {
   getMasterOffice: async () => {
     const response = await fetch(`${BASE_URL_1}/masterOffice`);
-    return response.json();
+    const data = await response.json();
+
+    return data.filter(k => ["1", "2", "3", "4", "5"].includes(k.id));
   },
   
   getMasterMeetingRooms: async () => {

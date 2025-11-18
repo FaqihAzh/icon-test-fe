@@ -13,6 +13,7 @@ export const Select = ({
   error,
   disabled,
   min,
+  isPrimary = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
@@ -34,7 +35,7 @@ export const Select = ({
     <div className="flex flex-col gap-2 w-full">
       {/* Label */}
       {label && (
-        <label className="text-sm font-medium text-gray-700">
+        <label className={`font-medium ${isPrimary ? 'text-[#333333] text-sm' : 'text-[#4E4E4E] text-xs'}`}>
           {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
