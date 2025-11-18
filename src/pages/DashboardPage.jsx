@@ -118,11 +118,11 @@ export const DashboardPage = () => {
 
                   return (
                     <div key={rIdx} className="bg-gray-100 rounded-lg shadow-sm p-4">
-                      <h4 className="text-sm font-normal text-gray-700">{room.roomName}</h4>
+                      <h4 className="text-sm font-normal text-[#4E4E4E]">{room.roomName}</h4>
                       <div className="flex items-center justify-between mt-2">
                         <div>
-                          <p className="text-xs text-gray-600 2xl:hidden">% Pemakaian</p>
-                          <p className="text-[11.5px] text-gray-600 hidden 2xl:block">
+                          <p className="text-xs text-[#625B71] 2xl:hidden">% Pemakaian</p>
+                          <p className="text-[11.5px] text-[#625B71] hidden 2xl:block">
                             Persentase Pemakaian
                           </p>
                           <p className="text-xl font-bold text-text-primary">{usage}%</p>
@@ -151,7 +151,7 @@ export const DashboardPage = () => {
                       </div>
 
                       <div className="mt-2 mb-3">
-                        <p className="text-xs text-gray-600">Nominal Konsumsi</p>
+                        <p className="text-xs text-[#625B71]">Nominal Konsumsi</p>
                         <p className="text-xl font-bold text-text-primary mt-0.5">
                           {formatCurrency(cost)}
                         </p>

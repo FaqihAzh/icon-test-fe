@@ -14,7 +14,6 @@ export const Sidebar = () => {
   const [mini, setMini] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -26,7 +25,7 @@ export const Sidebar = () => {
       }
     };
 
-    handleResize(); // inisialisasi awal
+    handleResize(); 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);

@@ -55,14 +55,14 @@ export const MeetingRoomPage = () => {
               {displayedRooms.map(item => (
                 <div
                   key={item.id}
-                  className="rounded-xl border border-gray-200 shadow-xs p-5 transition hover:shadow-sm hover:scale-[1.01] cursor-pointer"
+                  className="rounded-xl border border-hr shadow-xs p-5 transition hover:shadow-sm hover:scale-[1.01] cursor-pointer"
                 >
                   <div className="flex flex-col">
                     <h2 className="text-lg font-semibold text-text-primary mb-0.5">
                       {item.roomName}
                     </h2>
                     <p className="text-sm text-gray-500">{item.officeName}</p>
-                    <hr className="border-gray-200 my-2" />
+                    <hr className="border-hr my-2" />
                     <p className="text-sm text-secondary-500 font-semibold">
                       Kapasitas {item.capacity} Orang
                     </p>

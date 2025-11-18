@@ -112,7 +112,7 @@ export const BookingFormPage = () => {
             </div>
           </div>
 
-          <hr className="border-gray-200" />
+          <hr className="border-hr" />
 
           <div>
             <h3 className="text-base font-semibold mb-4 text-text-primary">
@@ -197,7 +197,7 @@ export const BookingFormPage = () => {
             </div>
           </div>
 
-          <hr className="border-gray-200" />
+          <hr className="border-hr" />
 
           <div className="flex justify-end gap-3">
             <Button type="button" variant="noOutline" onClick={handleCancel}>
