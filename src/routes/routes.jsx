@@ -4,11 +4,11 @@ import { BookingFormPage } from '../pages/BookingFormPage';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/ruang-meeting',
     element: <MeetingRoomPage />,
   },
   {
-    path: '/create',
+    path: '/ruang-meeting/pengajuan-perangkat',
     element: <BookingFormPage />,
   },
 ]);

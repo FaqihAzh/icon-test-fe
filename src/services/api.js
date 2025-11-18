@@ -14,7 +14,9 @@ export const api = {
   
   getMasterJenisKonsumsi: async () => {
     const response = await fetch(`${BASE_URL_2}/masterJenisKonsumsi`);
-    return response.json();
+    const data = await response.json();
+
+    return data.filter(k => ["1", "2", "3"].includes(k.id));
   },
   
   getSummaryBookings: async () => {

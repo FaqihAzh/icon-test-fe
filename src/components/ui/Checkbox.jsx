@@ -16,9 +16,11 @@ export const Checkbox = ({
       disabled={disabled}
       onClick={() => onCheckedChange && onCheckedChange(!checked)}
       className={cn(
-        "h-5 w-5 rounded border-2 border-[#3A92A5] flex items-center justify-center transition-colors",
-        checked ? "bg-[#3A92A5]" : "bg-white",
-        disabled && "opacity-50 cursor-not-allowed",
+        "h-5 w-5 rounded border flex items-center justify-center transition-colors",
+        checked 
+          ? "border-[#3D7D8F] bg-[#3D7D8F]" 
+          : "border-gray-300 bg-white",
+        disabled && "cursor-not-allowed",
         className
       )}
       {...props}
