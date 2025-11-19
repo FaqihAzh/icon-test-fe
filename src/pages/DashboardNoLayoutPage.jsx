@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Layout } from '../components/layout';
 import { Select } from '../components/ui/Select';
 import { EmptyState } from '../components/ui/EmptyState';
 import { TruncatePopup } from '../components/ui/TruncatePopup';
@@ -10,8 +9,6 @@ import GenIcon from '../assets/icons/generation.svg';
 import { DashboardHeader } from '../components/layout/DashboardHeader';
 
 export const DashboardNoLayoutPage = () => {
-  const breadCrumbs = [{ label: 'Dashboard', href: '/' }];
-
   const [summaryData, setSummaryData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPeriod, setSelectedPeriod] = useState('Jan-2024');

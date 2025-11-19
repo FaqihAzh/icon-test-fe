@@ -12,6 +12,11 @@ export const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
+    path: '/dashboard',
+    element: <DashboardNoLayoutPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
     path: '/ruang-meeting',
     element: <MeetingRoomPage />,
   },
@@ -22,9 +27,5 @@ export const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFoundPage />,
-  },
-  {
-    path: '/dashboard-no-layout',
-    element: <DashboardNoLayoutPage />,
   },
 ]);
