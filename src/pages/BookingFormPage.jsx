@@ -8,9 +8,14 @@ import { PageLoader } from '../components/ui/Loader';
 import { Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useBookingForm } from '../hooks/useBookingForm';
+import { BookingSuccessModal } from '../components/ui/BookingSuccessModal';
+import { useState } from 'react';
 
 export const BookingFormPage = () => {
   const navigate = useNavigate();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState(null);
+
   const {
     formData,
     setFormData,
@@ -50,13 +55,27 @@ export const BookingFormPage = () => {
     e.preventDefault();
     if (!validate()) return;
 
-    console.log('Submit:', {
-      ...formData,
+    const selectedUnit = masterOffices.find(o => o.id === formData.unitId);
+    const selectedRoom = filteredRooms.find(r => r.id === formData.roomId);
+    
+    const details = {
+      unitName: selectedUnit?.officeName || '-',
+      roomName: selectedRoom?.roomName || '-',
+      kapasitas: kapasitas,
+      tanggalRapat: formData.tanggalRapat,
+      waktuMulai: formData.waktuMulai,
+      waktuSelesai: formData.waktuSelesai,
+      jumlahPeserta: formData.jumlahPeserta,
       konsumsi: selectedKonsumsi,
-      nominal,
-    });
+      nominal: nominal,
+    };
 
-    alert('Pemesanan berhasil disimpan!');
+    setBookingDetails(details);
+    setShowSuccessModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
     navigate('/');
   };
 
@@ -71,7 +90,7 @@ export const BookingFormPage = () => {
   }
 
   return (
-    <Layout title="Ruang Meeting" breadCrumbs={breadCrumbs} showBack={true}>
+    <Layout title="Pengajuan Perangkat" breadCrumbs={breadCrumbs} showBack={true}>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-8">
           <div>
@@ -112,7 +131,7 @@ export const BookingFormPage = () => {
             </div>
           </div>
 
-          <hr className="border-hr" />
+          <hr className="border-gray-200" />
 
           <div>
             <h3 className="text-base font-semibold mb-4 text-text-primary">
@@ -197,7 +216,7 @@ export const BookingFormPage = () => {
             </div>
           </div>
 
-          <hr className="border-hr" />
+          <hr className="border-gray-200" />
 
           <div className="flex justify-end gap-3">
             <Button type="button" variant="noOutline" onClick={handleCancel}>
@@ -209,6 +228,12 @@ export const BookingFormPage = () => {
           </div>
         </form>
       </div>
+
+      <BookingSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        bookingData={bookingDetails}
+      />
     </Layout>
   );
 };
