@@ -3,6 +3,7 @@ import { DashboardPage } from '../pages/DashboardPage';
 import { MeetingRoomPage } from '../pages/MeetingRoomPage';
 import { BookingFormPage } from '../pages/BookingFormPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { DashboardNoLayoutPage } from '../pages/DashboardNoLayoutPage';
 
 export const router = createBrowserRouter([
   {
@@ -21,5 +22,9 @@ export const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFoundPage />,
+  },
+  {
+    path: '/dashboard-no-layout',
+    element: <DashboardNoLayoutPage />,
   },
 ]);

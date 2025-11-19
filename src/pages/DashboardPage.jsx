@@ -80,7 +80,7 @@ export const DashboardPage = () => {
   return (
     <Layout title="Dashboard" breadCrumbs={breadCrumbs}>
       <div className="space-y-6">
-        <div className="max-w-xs">
+        <div className="max-w-full md:max-w-xs">
           <Select 
             isPrimary={false} 
             label="Periode" 
