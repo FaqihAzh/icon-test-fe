@@ -22,7 +22,6 @@ export const useBookingForm = () => {
     jumlahPeserta: '0',
   });
 
-  // Load master data
   useEffect(() => {
     const loadMasterData = async () => {
       try {
@@ -46,7 +45,6 @@ export const useBookingForm = () => {
     loadMasterData();
   }, []);
 
-  // Filter rooms based on selected unit
   useEffect(() => {
     if (formData.unitId) {
       const filtered = masterRooms.filter(r => r.officeId === formData.unitId);
@@ -64,7 +62,6 @@ export const useBookingForm = () => {
     }
   }, [formData.unitId, masterRooms, formData.roomId]);
 
-  // Set capacity when room is selected
   useEffect(() => {
     if (formData.roomId) {
       const room = masterRooms.find(r => r.id === formData.roomId);
@@ -74,7 +71,6 @@ export const useBookingForm = () => {
     }
   }, [formData.roomId, masterRooms]);
 
-  // Calculate consumption automatically
   useEffect(() => {
     if (formData.waktuMulai && formData.waktuSelesai) {
       const hasil = calculateConsumption(
@@ -88,7 +84,6 @@ export const useBookingForm = () => {
     }
   }, [formData.waktuMulai, formData.waktuSelesai, masterKonsumsi]);
 
-  // Calculate nominal automatically
   useEffect(() => {
     if (formData.jumlahPeserta && selectedKonsumsi.length > 0) {
       const total = calculateNominal(
@@ -101,8 +96,40 @@ export const useBookingForm = () => {
     }
   }, [formData.jumlahPeserta, selectedKonsumsi]);
 
+  const timeToMinutes = (time) => {
+    if (!time) return 0;
+    const [h, m] = time.split(':').map(Number);
+    return h * 60 + m;
+  };
+
   const validate = () => {
-    const newErrors = validateBookingForm(formData, kapasitas);
+    let newErrors = validateBookingForm(formData, kapasitas);
+
+    const now = new Date();
+    const todayStr = now.toISOString().split("T")[0];
+
+    const selectedDate = formData.tanggalRapat;
+    const isToday = selectedDate === todayStr;
+
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const mulai = timeToMinutes(formData.waktuMulai);
+    const selesai = timeToMinutes(formData.waktuSelesai);
+
+    // Jika tanggal hari ini → mulai tidak boleh lewat waktu sekarang
+    if (isToday && mulai < nowMinutes) {
+      newErrors.waktuMulai = "Waktu mulai tidak boleh kurang dari waktu saat ini.";
+    }
+
+    // Jika tanggal hari ini → selesai tidak boleh lewat waktu sekarang
+    if (isToday && selesai < nowMinutes) {
+      newErrors.waktuSelesai = "Waktu selesai tidak boleh kurang dari waktu saat ini.";
+    }
+
+    // Waktu selesai harus > waktu mulai
+    if (mulai && selesai && selesai <= mulai) {
+      newErrors.waktuSelesai = "Waktu selesai harus lebih besar dari waktu mulai.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };

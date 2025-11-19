@@ -1,16 +1,73 @@
-# React + Vite
+# Icon Frontend Test | iMeeting | Faqih Azhar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi ini adalah proyek *frontend* yang dikembangkan menggunakan **React** dan **Vite** untuk simulasi sistem pemesanan ruang meeting dan dashboard monitoring penggunaan sumber daya (konsumsi) di lingkungan kantor.
 
-Currently, two official plugins are available:
+## Fitur Utama
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Dashboard Monitoring
+* Menampilkan ringkasan persentase penggunaan ruang meeting dan total **nominal konsumsi** per unit/ruangan.
+* Data dapat difilter berdasarkan periode waktu (bulan/tahun).
+* Visualisasi penggunaan dengan *progress bar*.
 
-## React Compiler
+### Pemesanan Ruang Meeting
+* Formulir mencakup Unit, Ruangan, Tanggal, Waktu Mulai/Selesai, dan Jumlah Peserta.
+* **Validasi Kapasitas**: Memastikan jumlah peserta tidak melebihi kapasitas ruangan.
+* **Kalkulasi Konsumsi Otomatis**: Secara otomatis memilih jenis konsumsi (`Snack Pagi`, `Makan Siang`, dll.) berdasarkan jam rapat yang dikonfigurasi dalam `TIME_BOUNDARIES`.
+* **Kalkulasi Nominal**: Menghitung total biaya konsumsi.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Halaman Ruang Meeting
+* Menampilkan daftar ruangan sesuai data yang tersedia.
 
-## Expanding the ESLint configuration
+***
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Teknologi yang Digunakan
+
+| Kategori | Teknologi | Versi |
+| :--- | :--- | :--- |
+| **Library** | **React** | `^19.2.0` |
+| **Tooling** | **Vite** | `^7.2.2` |
+| **Styling** | **Tailwind CSS**| `^4.1.17` |
+| **Routing** | **React Router DOM** | `^7.9.6` |
+| **HTTP Client** | **Axios** | `^1.13.2` |
+| **Iocns** | **lucide-react** | `^0.554.0` |
+
+***
+
+## Instalasi
+
+```bash
+git clone https://github.com/FaqihAzh/icon-test-fe
+cd icon-test-fe
+
+npm install
+# atau
+yarn install
+# atau
+pnpm install
+
+# .env
+VITE_BASE_URL_PRIMARY=http://<URL_Primary_API>
+VITE_BASE_URL_SECONDARY=http://<URL_Secondary_API>
+
+npm run dev
+```
+
+## Screenshoot
+
+#### Dashboard Layout
+![Dashboard Layout](./src/assets/screenshoots/dashboard-layout.png)
+
+#### Daftar Meeting Room
+![Daftar Meeting Room](./src/assets/screenshoots/r-meeting.png)
+
+#### Form Pemesanan Ruangan
+![Form Pemesanan Ruangan](./src/assets/screenshoots/meeting-form.png)
+
+#### Form Pemesanan Ruangan
+![Pemesanan Sukses](./src/assets/screenshoots/success.png)
+
+#### Dashboard no Layout
+![Dashboard no Layout](./src/assets/screenshoots/dashboard-no-layout.png)
+
+#### 404 Not Found
+![404 Not Found](./src/assets/screenshoots/not-found.png)
